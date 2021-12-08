@@ -100,7 +100,7 @@ module "lambda" {
 
   create_role               = var.lambda_role == ""
   lambda_role               = var.lambda_role
-  role_name                 = (count(var.iam_role_name_prefix) > 1 ? "${var.iam_role_name_prefix}-${var.lambda_function_name}" : var.lambda_function_name)
+  role_name                 = (length(var.iam_role_name_prefix) > 1 ? "${var.iam_role_name_prefix}-${var.lambda_function_name}" : var.lambda_function_name)
   role_permissions_boundary = var.iam_role_boundary_policy_arn
   role_tags                 = var.iam_role_tags
 
