@@ -89,13 +89,14 @@ module "lambda" {
   # If publish is disabled, there will be "Error adding new Lambda Permission for notify_slack: InvalidParameterValueException: We currently do not support adding policies for $LATEST."
   publish = true
 
-  environment_variables = {
+  environment_variables = merge({
     SLACK_WEBHOOK_URL = var.slack_webhook_url
     SLACK_CHANNEL     = var.slack_channel
     SLACK_USERNAME    = var.slack_username
     SLACK_EMOJI       = var.slack_emoji
     LOG_EVENTS        = var.log_events ? "True" : "False"
-  }
+  },
+  var.environment_variables)
 
   create_role               = var.lambda_role == ""
   lambda_role               = var.lambda_role
