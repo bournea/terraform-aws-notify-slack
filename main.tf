@@ -95,12 +95,12 @@ module "lambda" {
     SLACK_USERNAME    = var.slack_username
     SLACK_EMOJI       = var.slack_emoji
     LOG_EVENTS        = var.log_events ? "True" : "False"
-  },
+    },
   var.environment_variables)
 
   create_role               = var.lambda_role == ""
   lambda_role               = var.lambda_role
-  role_name                 = "${var.iam_role_name_prefix}-${var.lambda_function_name}"
+  role_name                 = (var.iam_role_name_prefix ? "${var.iam_role_name_prefix}-${var.lambda_function_name}" : var.lambda_function_name)
   role_permissions_boundary = var.iam_role_boundary_policy_arn
   role_tags                 = var.iam_role_tags
 
