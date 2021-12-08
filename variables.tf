@@ -161,3 +161,9 @@ variable "subscription_filter_policy" {
   type        = string
   default     = null
 }
+
+variable "environment_variables" {
+  description = "A map that defines extra environment variables for the Lambda Function."
+  type        = map(string)
+  default     = {}
+}
